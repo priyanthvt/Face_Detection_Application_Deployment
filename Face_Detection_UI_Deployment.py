@@ -2,6 +2,11 @@ import streamlit as st
 from PIL import Image
 import torch
 
+import sys
+sys.path.append("yolov5")  # Tell Python to look inside the yolov5 folder
+
+from models.common import DetectMultiBackend  # Import from yolov5
+
 st.set_page_config(
     page_title="YOLOv5 Face Detection",
     layout="centered",
@@ -23,11 +28,17 @@ def set_background(image_url):
         unsafe_allow_html=True
     )
 
+# @st.cache_resource
+# def load_model():
+#     # model_path = r"E:\Priyanth\AIML\Project\FaceDetection\FaceDetectionVScode\yolov5\runs\train\face_detect\weights\best.pt"
+#     model_path = r"model\best.pt"
+#     model = torch.hub.load("ultralytics/yolov5", "custom", path=model_path, force_reload=True)
+#     return model
+
 @st.cache_resource
 def load_model():
-    # model_path = r"E:\Priyanth\AIML\Project\FaceDetection\FaceDetectionVScode\yolov5\runs\train\face_detect\weights\best.pt"
-    model_path = r"model\best.pt"
-    model = torch.hub.load("ultralytics/yolov5", "custom", path=model_path, force_reload=True)
+    model_path = "model/best.pt"  # Update with your path if needed
+    model = DetectMultiBackend(model_path, device='cpu')  # or 'cuda' if you're using GPU
     return model
 
 model = load_model()
@@ -126,5 +137,6 @@ elif st.session_state.page == "detect":
     detect_faces()
 elif st.session_state.page == "results":
     results_page()
+
 
 
