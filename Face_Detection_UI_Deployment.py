@@ -25,7 +25,8 @@ def set_background(image_url):
 
 @st.cache_resource
 def load_model():
-    model_path = r"E:\Priyanth\AIML\Project\FaceDetection\FaceDetectionVScode\yolov5\runs\train\face_detect\weights\best.pt"
+    # model_path = r"E:\Priyanth\AIML\Project\FaceDetection\FaceDetectionVScode\yolov5\runs\train\face_detect\weights\best.pt"
+    model_path = r"model/best.pt"
     model = torch.hub.load("ultralytics/yolov5", "custom", path=model_path, force_reload=True)
     return model
 
@@ -125,3 +126,4 @@ elif st.session_state.page == "detect":
     detect_faces()
 elif st.session_state.page == "results":
     results_page()
+
