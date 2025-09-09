@@ -8,7 +8,8 @@ sys.path.append("yolov5")  # Tell Python to look inside the yolov5 folder
 # from models.common import DetectMultiBackend  # Import from yolov5
 
 from models.experimental import attempt_load
-from utils.general import non_max_suppression, scale_coords
+# from utils.general import non_max_suppression, scale_coords
+from yolov5.utils.general import non_max_suppression, scale_coords
 from utils.torch_utils import select_device
 
 import torchvision.transforms as transforms
@@ -203,6 +204,7 @@ elif st.session_state.page == "detect":
     detect_faces()
 elif st.session_state.page == "results":
     results_page()
+
 
 
 
